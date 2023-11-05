@@ -1,9 +1,44 @@
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/Authentication";
+import { updateProfile } from "firebase/auth";
+import auth from "../../firebase/firebase.config";
 
 const Register = () => {
+  const { createAccount } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
   const register = (event) => {
     event.preventDefault();
     console.log("register form is submitted");
+
+    const form = event.target;
+    const username = form.username.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const photo = form.photo.value;
+
+    createAccount(email, password)
+      .then(() => {
+        updateProfile(auth.currentUser, {
+          displayName: username,
+          photoURL: photo,
+        })
+          .then(() => {
+            navigate("/login");
+          })
+          .catch((error) => console.log(error));
+      })
+      .catch((error) => console.log(error));
+
+    console.log(username, email, password, photo);
+
+    // Clear the form input field
+    form.username.value = "";
+    form.email.value = "";
+    form.password.value = "";
+    form.photo.value = "";
   };
   return (
     <div className="flex justify-center items-center h-screen">
