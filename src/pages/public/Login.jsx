@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../../context/Authentication";
 import { Link, useNavigate } from "react-router-dom";
+import { AiFillHome, AiFillGithub, AiOutlineGoogle } from "react-icons/ai";
 
 const Login = () => {
   const { signIn } = useContext(AuthContext);
@@ -29,9 +30,14 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
-      <div className="border rounded-md p-3 w-3/12 shadow-md">
-        <h1>Login now</h1>
+    <div className="bg-gray-100 flex justify-center items-center h-screen">
+      <div className="bg-white border rounded-md p-3 w-3/12 shadow-md">
+        <div className="flex justify-between">
+          <h1 className="text-2xl font-semibold mb-4">Login Now</h1>
+          <Link to={"/"}>
+            <AiFillHome className="w-7 h-7 hover:text-red-400" />
+          </Link>
+        </div>
         <form onSubmit={login}>
           <input
             type="email"
@@ -58,8 +64,18 @@ const Login = () => {
         <p>
           <h4 className="text-center my-2 text-slate-600">Or Sign In With</h4>
           <div className="flex gap-2 justify-center items-center">
-            <button className="border p-2">Google</button>
-            <button className="border p-2">Github</button>
+            <button className="border p-2 flex items-center gap-2 rounded-md hover:bg-violet-400 hover:text-white">
+              <span>
+                <AiOutlineGoogle />
+              </span>
+              <span>Google</span>
+            </button>
+            <button className="border p-2 flex items-center gap-2 rounded-md hover:bg-violet-400 hover:text-white">
+              <span>
+                <AiFillGithub />
+              </span>
+              <span>GitHub</span>
+            </button>
           </div>
         </p>
         <p className="text-slate-600 text-center mt-3">

@@ -1,3 +1,9 @@
 nav a.active {
-    color: violet;
+  font-weight: 600;
+  color: violet;
+}
+
+nav a:hover {
+  transform: scale(1.025);
+  transition: all ease-in-out 0.125s;
 }

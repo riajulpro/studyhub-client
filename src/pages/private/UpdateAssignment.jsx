@@ -27,10 +27,12 @@ const UpdateAssignment = () => {
 
   return (
     <div className="bg-gray-100 h-screen flex justify-center items-center">
-      <div className="md:w-1/2 mx-auto rounded-md shadow-md p-3 bg-white">
-        <h1 className="text-3xl font-bold mb-5">Update the Assignment</h1>
+      <div className="w-11/12 md:w-1/2 mx-auto rounded-md shadow-md p-3 bg-white">
+        <h1 className="text-xl md:text-3xl font-bold mb-5">
+          Update the Assignment
+        </h1>
         <form onSubmit={updateAssignment}>
-          <div className="flex gap-2">
+          <div className="flex flex-col md:flex-row gap-2">
             <input
               type="text"
               name="title"
@@ -52,7 +54,7 @@ const UpdateAssignment = () => {
               placeholder="Write description here"
             ></textarea>
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-col md:flex-row gap-2">
             <input
               type="text"
               name="marks"
@@ -66,7 +68,7 @@ const UpdateAssignment = () => {
             </select>
             <input type="date" name="dueDate" className="border flex-1 p-1" />
           </div>
-          <div className="flex justify-end gap-2">
+          <div className="flex justify-between md:justify-end gap-2">
             <Link
               to={"/"}
               className="border py-2 px-10 mt-2 bg-red-600 text-white hover:bg-red-400 cursor-pointer active:scale-95 select-none"
@@ -75,7 +77,7 @@ const UpdateAssignment = () => {
             </Link>
             <input
               type="submit"
-              value="Update"
+              value="Create"
               className="border py-2 px-10 mt-2 bg-blue-600 text-white hover:bg-blue-400 cursor-pointer active:scale-95"
             />
           </div>

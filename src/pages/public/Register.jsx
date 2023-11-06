@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/Authentication";
 import { updateProfile } from "firebase/auth";
 import auth from "../../firebase/firebase.config";
+import { AiFillHome, AiFillGithub, AiOutlineGoogle } from "react-icons/ai";
 
 const Register = () => {
   const { createAccount } = useContext(AuthContext);
@@ -41,9 +42,14 @@ const Register = () => {
     form.photo.value = "";
   };
   return (
-    <div className="flex justify-center items-center h-screen">
-      <div className="border rounded-md p-3 w-3/12 shadow-md">
-        <h1>Create Account</h1>
+    <div className="bg-gray-100 flex justify-center items-center h-screen">
+      <div className="bg-white border rounded-md p-3 w-3/12 shadow-md">
+        <div className="flex justify-between">
+          <h1 className="text-2xl font-semibold mb-4">Create Account</h1>
+          <Link to={"/"}>
+            <AiFillHome className="w-7 h-7 hover:text-red-500" />
+          </Link>
+        </div>
         <form onSubmit={register}>
           <input
             type="text"
@@ -86,8 +92,18 @@ const Register = () => {
         <p>
           <h4 className="text-center my-2 text-slate-600">Or Sign In With</h4>
           <div className="flex gap-2 justify-center items-center">
-            <button className="border p-2">Google</button>
-            <button className="border p-2">Github</button>
+            <button className="border p-2 flex items-center gap-2 rounded-md hover:bg-violet-400 hover:text-white">
+              <span>
+                <AiOutlineGoogle />
+              </span>
+              <span>Google</span>
+            </button>
+            <button className="border p-2 flex items-center gap-2 rounded-md hover:bg-violet-400 hover:text-white">
+              <span>
+                <AiFillGithub />
+              </span>
+              <span>GitHub</span>
+            </button>
           </div>
         </p>
         <p className="text-slate-600 text-center mt-3">
