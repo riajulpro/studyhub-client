@@ -31,7 +31,7 @@ const CreateAssignment = () => {
   };
 
   return (
-    <div className="bg-gray-100 h-screen flex justify-center items-center">
+    <div className="bg-gray-100 h-[calc(100vh-100px)] flex justify-center items-center">
       <div className="w-11/12 md:w-1/2 mx-auto rounded-md shadow-md p-3 bg-white">
         <h1 className="text-xl md:text-3xl font-bold mb-5">
           Create an Assignment
