@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/Authentication";
+import axios from "axios";
 
 const CreateAssignment = () => {
   const { user } = useContext(AuthContext);
@@ -28,6 +29,18 @@ const CreateAssignment = () => {
     };
 
     console.log(assignment);
+
+    axios
+      .post("http://localhost:5000/assignment", assignment)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+
+    form.title.value = "";
+    form.thumbnail.value = "";
+    form.description.value = "";
+    form.marks.value = "";
+    form.level.value = "";
+    form.dueDate.value = "";
   };
 
   return (

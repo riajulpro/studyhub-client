@@ -1,7 +1,9 @@
-import { Link, useLoaderData } from "react-router-dom";
+import axios from "axios";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 
 const UpdateAssignment = () => {
   const previousData = useLoaderData();
+  const navigate = useNavigate();
 
   const { _id, title, thumbnail, description, marks, level, dueDate } =
     previousData[0];
@@ -30,6 +32,14 @@ const UpdateAssignment = () => {
     };
 
     console.log(updatedData);
+
+    axios
+      .put(`http://localhost:5000/assignment/${_id}`, updatedData)
+      .then((res) => {
+        if (res.data.modifiedCount > 0) {
+          navigate("/all-assignment");
+        }
+      });
   };
 
   return (

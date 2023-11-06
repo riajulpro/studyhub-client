@@ -1,9 +1,8 @@
+import { useState } from "react";
+
 const Home = () => {
-  return (
-    <div>
-      <h1>Welcome home</h1>
-    </div>
-  );
+  const [controlModal, setControlModal] = useState(false);
+  return <div></div>;
 };
 
 export default Home;
