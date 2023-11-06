@@ -1,6 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 const UpdateAssignment = () => {
+  const previousData = useLoaderData();
+
+  const { _id, title, thumbnail, description, marks, level, dueDate } =
+    previousData[0];
+
+  console.log(previousData, title);
+
   const updateAssignment = (event) => {
     event.preventDefault();
     console.log("assignment updated successfully");
@@ -33,26 +40,41 @@ const UpdateAssignment = () => {
         </h1>
         <form onSubmit={updateAssignment}>
           <div className="flex flex-col md:flex-row gap-2">
-            <input
-              type="text"
-              name="title"
-              className="p-1 w-full border"
-              placeholder="Enter title"
-            />
-            <input
-              type="text"
-              name="thumbnail"
-              className="p-1 w-full border"
-              placeholder="https://thumbnail-url.com/enter.jpg"
-            />
+            <label htmlFor="title" className="w-full">
+              Title:
+              <input
+                type="text"
+                name="title"
+                id="title"
+                className="p-1 w-full border"
+                placeholder="Enter title"
+                defaultValue={title}
+              />
+            </label>
+            <label htmlFor="thumbnail" className="w-full">
+              Thumbnail Image URL:
+              <input
+                type="text"
+                name="thumbnail"
+                id="thumbnail"
+                className="p-1 w-full border"
+                placeholder="https://thumbnail-url.com/enter.jpg"
+                defaultValue={thumbnail}
+              />
+            </label>
           </div>
           <div>
-            <textarea
-              name="description"
-              rows="5"
-              className="border w-full p-1 my-1"
-              placeholder="Write description here"
-            ></textarea>
+            <label htmlFor="description" className="w-full">
+              Description:
+              <textarea
+                name="description"
+                id="description"
+                rows="5"
+                className="border w-full p-1 my-1"
+                placeholder="Write description here"
+                defaultValue={description}
+              ></textarea>
+            </label>
           </div>
           <div className="flex flex-col md:flex-row gap-2">
             <input
@@ -60,13 +82,23 @@ const UpdateAssignment = () => {
               name="marks"
               className="border flex-1 p-1"
               placeholder="Marks"
+              defaultValue={marks}
             />
-            <select name="level" className="border flex-1 p-1">
+            <select
+              name="level"
+              className="border flex-1 p-1"
+              defaultValue={level}
+            >
               <option value="easy">Easy</option>
               <option value="medium">Medium</option>
               <option value="hard">Hard</option>
             </select>
-            <input type="date" name="dueDate" className="border flex-1 p-1" />
+            <input
+              type="date"
+              name="dueDate"
+              className="border flex-1 p-1"
+              defaultValue={dueDate}
+            />
           </div>
           <div className="flex justify-between md:justify-end gap-2">
             <Link
@@ -77,7 +109,7 @@ const UpdateAssignment = () => {
             </Link>
             <input
               type="submit"
-              value="Create"
+              value="Update"
               className="border py-2 px-10 mt-2 bg-blue-600 text-white hover:bg-blue-400 cursor-pointer active:scale-95"
             />
           </div>
