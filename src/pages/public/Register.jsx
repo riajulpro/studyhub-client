@@ -12,7 +12,6 @@ const Register = () => {
 
   const register = (event) => {
     event.preventDefault();
-    console.log("register form is submitted");
 
     const form = event.target;
     const username = form.username.value;
@@ -32,8 +31,6 @@ const Register = () => {
           .catch((error) => console.log(error));
       })
       .catch((error) => console.log(error));
-
-    console.log(username, email, password, photo);
 
     // Clear the form input field
     form.username.value = "";
@@ -85,7 +82,7 @@ const Register = () => {
           <br />
           <input
             type="submit"
-            value="Login"
+            value="Register"
             className="bg-violet-600 hover:bg-violet-400 cursor-pointer text-white border p-1 my-1 w-full"
           />
         </form>
