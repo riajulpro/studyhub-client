@@ -2,7 +2,7 @@ import { Link, useLoaderData } from "react-router-dom";
 // import useAssignments from "../../hooks/useAssignments";
 import Loading from "../../components/Loading/Loading";
 import { useEffect, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 const AllAssignment = () => {
   const { count } = useLoaderData();
@@ -20,6 +20,12 @@ const AllAssignment = () => {
         setIsLoading(false);
       });
   }, [currentPage]);
+
+  const deleteAnItem = (id) => {
+    axios
+      .delete(`http://localhost:5000/assignments/${id}`)
+      .then((res) => console.log(res.data));
+  };
 
   // const { data: assignments, isLoading, refetch } = useAssignments();
 
@@ -51,6 +57,12 @@ const AllAssignment = () => {
               >
                 Edit
               </Link>
+              <button
+                className="bg-violet-400 text-white px-3 py-1 mr-1 hover:bg-violet-300 active:scale-95 rounded"
+                onClick={() => deleteAnItem(ass._id)}
+              >
+                Delete
+              </button>
             </p>
           </div>
         ))}
