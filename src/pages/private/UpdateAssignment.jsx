@@ -8,8 +8,6 @@ const UpdateAssignment = () => {
   const { _id, title, thumbnail, description, marks, level, dueDate } =
     previousData[0];
 
-  console.log(previousData, title);
-
   const updateAssignment = (event) => {
     event.preventDefault();
     console.log("assignment updated successfully");
@@ -30,8 +28,6 @@ const UpdateAssignment = () => {
       level,
       dueDate,
     };
-
-    console.log(updatedData);
 
     axios
       .put(`http://localhost:5000/assignment/${_id}`, updatedData)

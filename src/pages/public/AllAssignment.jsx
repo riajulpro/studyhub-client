@@ -1,10 +1,27 @@
-import { Link } from "react-router-dom";
-import useAssignments from "../../hooks/useAssignments";
+import { Link, useLoaderData } from "react-router-dom";
+// import useAssignments from "../../hooks/useAssignments";
 import Loading from "../../components/Loading/Loading";
+import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 const AllAssignment = () => {
-  const { data: assignments, isLoading, isFetching } = useAssignments();
-  console.log(assignments, isLoading, isFetching);
+  const { count } = useLoaderData();
+  const pages = [...Array(Math.ceil(count / 10)).keys()];
+  const [currentPage, setCurrentPage] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const [assignments, setAssignments] = useState([]);
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/assignments?page=${currentPage}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setAssignments(data);
+        setIsLoading(false);
+      });
+  }, [currentPage]);
+
+  // const { data: assignments, isLoading, refetch } = useAssignments();
 
   if (isLoading) {
     return (
@@ -15,7 +32,7 @@ const AllAssignment = () => {
   }
 
   return (
-    <div>
+    <>
       <div className="md:w-9/12 mx-auto grid gap-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-5">
         {assignments?.map((ass) => (
           <div key={ass._id} className="bg-gray-100 rounded-md p-2">
@@ -38,7 +55,47 @@ const AllAssignment = () => {
           </div>
         ))}
       </div>
-    </div>
+
+      <div className="flex justify-center my-5">
+        <div>
+          <button
+            className="bg-gray-100 p-2 border-r"
+            onClick={() => {
+              if (currentPage > 0) {
+                setCurrentPage(currentPage - 1);
+              }
+            }}
+          >
+            Prev
+          </button>
+          {pages.map((page) => (
+            <button
+              key={page}
+              className={
+                currentPage === page
+                  ? "bg-orange-400 text-white p-2 border-r"
+                  : "bg-gray-100 p-2 border-r"
+              }
+              onClick={() => {
+                setCurrentPage(page);
+              }}
+            >
+              {page}
+            </button>
+          ))}
+          <button
+            className="bg-gray-100 p-2 border-r"
+            onClick={() => {
+              if (currentPage < pages.length - 1) {
+                setCurrentPage(currentPage + 1);
+              }
+            }}
+          >
+            Next
+          </button>
+        </div>
+      </div>
+    </>
   );
 };
 

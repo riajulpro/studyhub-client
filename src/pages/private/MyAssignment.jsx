@@ -4,7 +4,7 @@ import { AuthContext } from "../../context/Authentication";
 import LoadingSpin from "../../components/Loading/LoadingSpin";
 
 const MyAssignment = () => {
-  const { data: submittedData, isLoading, isFetching } = useSubmittedData();
+  const { data: submittedData, isLoading } = useSubmittedData();
   const { user } = useContext(AuthContext);
 
   if (isLoading) {
@@ -16,9 +16,21 @@ const MyAssignment = () => {
   );
 
   return (
-    <div>
-      <h1>These are my assignment that I have done. </h1>
-    </div>
+    <>
+      <div className="md:w-9/12 mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2 my-3">
+        {myCompletedAssignment.map((data) => (
+          <div key={data._id} className="bg-gray-50 p-2 border rounded-md">
+            <p className="font-semibold">{data.title}</p>
+            <p className="text-sm">Examinee: {data.examinee}</p>
+            <p className="text-sm">Level: {data.level}</p>
+            <p className="text-sm">Status: {data.status}</p>
+            <p className="text-sm">
+              Marks: {data.givenMarks}/{data.marks}
+            </p>
+          </div>
+        ))}
+      </div>
+    </>
   );
 };
 

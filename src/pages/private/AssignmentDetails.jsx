@@ -15,7 +15,6 @@ const AssignmentDetails = () => {
 
   const takeAssignment = (event) => {
     event.preventDefault();
-    console.log("Assignment has been taken");
 
     const form = event.target;
     const pdf = form.pdf.value;
@@ -27,9 +26,8 @@ const AssignmentDetails = () => {
       note,
       status: "pending",
       submittedBy: user?.email,
+      examinee: user?.displayName,
     };
-
-    console.log(submittedData);
 
     axios
       .post("http://localhost:5000/submitted", submittedData)
@@ -90,11 +88,11 @@ const AssignmentDetails = () => {
                   <input
                     type="submit"
                     value="Submit"
-                    className="bg-green-600 hover:bg-green-400 cursor-pointer text-white font-semibold px-3 py-1 mr-2"
+                    className="bg-green-600 hover:bg-green-400 active:scale-95 cursor-pointer text-white font-semibold px-3 py-1 mr-2"
                   />
                   <button
                     onClick={() => setActivateModal(false)}
-                    className="bg-red-600 hover:bg-red-400 cursor-pointer text-white font-semibold px-3 py-1"
+                    className="bg-red-600 hover:bg-red-400 cursor-pointer text-white font-semibold px-3 py-1 active:scale-95"
                   >
                     Close
                   </button>

@@ -8,7 +8,6 @@ const CreateAssignment = () => {
 
   const createAssignment = (event) => {
     event.preventDefault();
-    console.log("assignment created successfully");
 
     const form = event.target;
     const title = form.title.value;
@@ -27,8 +26,6 @@ const CreateAssignment = () => {
       dueDate,
       userEmail: user.email,
     };
-
-    console.log(assignment);
 
     axios
       .post("http://localhost:5000/assignment", assignment)
