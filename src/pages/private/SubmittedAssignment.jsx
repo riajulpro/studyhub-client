@@ -5,10 +5,13 @@ import { AuthContext } from "../../context/Authentication";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { AiOutlineDelete } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 const SubmittedAssignment = () => {
   const { user } = useContext(AuthContext);
   const [activateModal, setActivateModal] = useState(false);
+
+  const navigate = useNavigate();
 
   const { data: submittedData, isLoading, refetch } = useSubmittedData();
   if (isLoading) {
@@ -42,6 +45,7 @@ const SubmittedAssignment = () => {
           text: "Mark has been added to the assignment",
           icon: "success",
         });
+        navigate("/my-assignment");
       });
     }
   };
@@ -72,7 +76,7 @@ const SubmittedAssignment = () => {
   };
 
   return (
-    <div>
+    <>
       <div className="md:w-9/12 mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2 my-3">
         {mySubmission.map((data) => (
           <div key={data._id} className="bg-gray-50 p-2 border rounded-md">
@@ -166,7 +170,7 @@ const SubmittedAssignment = () => {
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
 };
 

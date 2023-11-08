@@ -12,21 +12,28 @@ const MyAssignment = () => {
   }
 
   const myCompletedAssignment = submittedData.filter(
-    (data) => data?.status === "completed" && data?.submittedBy === user?.email
+    (data) => data?.submittedBy === user?.email
   );
 
   return (
     <>
       <div className="md:w-9/12 mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2 my-3">
         {myCompletedAssignment.map((data) => (
-          <div key={data._id} className="bg-gray-50 p-2 border rounded-md">
+          <div
+            key={data._id}
+            className={
+              data.status === "completed"
+                ? "bg-gray-100 p-2 border rounded-md"
+                : "bg-gray-50 p-2 border rounded-md"
+            }
+          >
             <p className="font-semibold">{data.title}</p>
+            <p className="text-sm">Status: {data.status}</p>
+            <p className="text-sm">Marks: {data.marks}</p>
+            <p className="text-sm">Obtain Marks: {data.givenMarks}</p>
+            <p className="text-sm">Examiner Feedback: {data?.feedback}</p>
             <p className="text-sm">Examinee: {data.examinee}</p>
             <p className="text-sm">Level: {data.level}</p>
-            <p className="text-sm">Status: {data.status}</p>
-            <p className="text-sm">
-              Marks: {data.givenMarks}/{data.marks}
-            </p>
           </div>
         ))}
       </div>
