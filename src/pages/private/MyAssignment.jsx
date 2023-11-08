@@ -4,8 +4,8 @@ import { AuthContext } from "../../context/Authentication";
 import LoadingSpin from "../../components/Loading/LoadingSpin";
 
 const MyAssignment = () => {
-  const { data: submittedData, isLoading } = useSubmittedData();
   const { user } = useContext(AuthContext);
+  const { data: submittedData, isLoading } = useSubmittedData();
 
   if (isLoading) {
     return <LoadingSpin />;

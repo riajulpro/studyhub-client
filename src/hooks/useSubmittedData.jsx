@@ -4,7 +4,9 @@ const useSubmittedData = () => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ["submittedData"],
     queryFn: async () => {
-      const data = await fetch("http://localhost:5000/submitted");
+      const data = await fetch("http://localhost:5000/submitted", {
+        credentials: "include",
+      });
       return await data.json();
     },
   });

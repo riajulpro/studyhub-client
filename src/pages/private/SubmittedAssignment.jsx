@@ -5,10 +5,10 @@ import { AuthContext } from "../../context/Authentication";
 import axios from "axios";
 
 const SubmittedAssignment = () => {
-  const { data: submittedData, isLoading } = useSubmittedData();
   const { user } = useContext(AuthContext);
   const [activateModal, setActivateModal] = useState(false);
 
+  const { data: submittedData, isLoading } = useSubmittedData();
   if (isLoading) {
     return <LoadingSpin />;
   }

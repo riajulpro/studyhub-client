@@ -25,6 +25,7 @@ const Login = () => {
           .then((res) => console.log(res.data));
 
         alert("login successful");
+
         navigate("/");
       })
       .catch((error) => {
