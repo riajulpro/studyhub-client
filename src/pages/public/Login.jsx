@@ -3,9 +3,10 @@ import { AuthContext } from "../../context/Authentication";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiFillHome, AiFillGithub, AiOutlineGoogle } from "react-icons/ai";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const Login = () => {
-  const { signIn } = useContext(AuthContext);
+  const { signIn, loginWithGoogle, loginWithGithub } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -24,7 +25,11 @@ const Login = () => {
           .post("http://localhost:5000/jwt", user, { withCredentials: true })
           .then((res) => console.log(res.data));
 
-        alert("login successful");
+        Swal.fire({
+          title: "Successfully Login",
+          text: "You can access all the feature now",
+          icon: "success",
+        });
 
         if (location?.state) {
           navigate(location.state);
@@ -33,7 +38,60 @@ const Login = () => {
         }
       })
       .catch((error) => {
-        alert("user or password wrong");
+        Swal.fire({
+          title: "Wrong Credential!",
+          text: "enter correct email or password.",
+          icon: "error",
+        });
+        console.log(error);
+      });
+  };
+
+  const googleLoginFn = () => {
+    loginWithGoogle()
+      .then(() => {
+        Swal.fire({
+          title: "Successfully Login",
+          text: "You can access all the feature now",
+          icon: "success",
+        });
+
+        if (location?.state) {
+          navigate(location.state);
+        } else {
+          navigate("/");
+        }
+      })
+      .catch((error) => {
+        Swal.fire({
+          title: "Something is Wrong!",
+          text: "Check the internet connection",
+          icon: "error",
+        });
+        console.log(error);
+      });
+  };
+  const githubLoginFn = () => {
+    loginWithGithub()
+      .then(() => {
+        Swal.fire({
+          title: "Successfully Login",
+          text: "You can access all the feature now",
+          icon: "success",
+        });
+
+        if (location?.state) {
+          navigate(location.state);
+        } else {
+          navigate("/");
+        }
+      })
+      .catch((error) => {
+        Swal.fire({
+          title: "Something is Wrong!",
+          text: "Check the internet connection",
+          icon: "error",
+        });
         console.log(error);
       });
   };
@@ -67,19 +125,25 @@ const Login = () => {
           <input
             type="submit"
             value="Login"
-            className="bg-violet-600 hover:bg-violet-400 cursor-pointer text-white border p-1 my-1 w-full"
+            className="bg-primary hover:bg-primary/75 cursor-pointer text-white border p-1 my-1 w-full"
           />
         </form>
         <p>
-          <h4 className="text-center my-2 text-slate-600">Or Sign In With</h4>
+          <h4 className="text-center my-3 text-slate-600">Or Sign In With</h4>
           <div className="flex gap-2 justify-center items-center">
-            <button className="border p-2 flex items-center gap-2 rounded-md hover:bg-violet-400 hover:text-white">
+            <button
+              className="border p-2 flex items-center gap-2 rounded-md hover:bg-primary hover:text-white active:scale-95"
+              onClick={googleLoginFn}
+            >
               <span>
                 <AiOutlineGoogle />
               </span>
               <span>Google</span>
             </button>
-            <button className="border p-2 flex items-center gap-2 rounded-md hover:bg-violet-400 hover:text-white">
+            <button
+              className="border p-2 flex items-center gap-2 rounded-md hover:bg-primary hover:text-white active:scale-95"
+              onClick={githubLoginFn}
+            >
               <span>
                 <AiFillGithub />
               </span>
