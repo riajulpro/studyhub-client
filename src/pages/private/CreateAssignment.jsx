@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/Authentication";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 const CreateAssignment = () => {
   const { user } = useContext(AuthContext);
@@ -86,7 +87,7 @@ const CreateAssignment = () => {
     };
 
     axios
-      .post("http://localhost:5000/assignment", assignment)
+      .post("https://rp-assignment-11.vercel.app/assignment", assignment)
       .then(() => {
         Swal.fire({
           title: "Succeed",
@@ -107,64 +108,69 @@ const CreateAssignment = () => {
   };
 
   return (
-    <div className="bg-gray-100 h-[calc(100vh-100px)] flex justify-center items-center">
-      <div className="w-11/12 md:w-1/2 mx-auto rounded-md shadow-md p-3 bg-white">
-        <h1 className="text-xl md:text-3xl font-bold mb-5">
-          Create an Assignment
-        </h1>
-        <form onSubmit={createAssignment}>
-          <div className="flex flex-col md:flex-row gap-2">
-            <input
-              type="text"
-              name="title"
-              className="p-1 w-full border"
-              placeholder="Enter title"
-            />
-            <input
-              type="text"
-              name="thumbnail"
-              className="p-1 w-full border"
-              placeholder="Enter thumbnail url (E.g. https://thumbnail-url.com/enter.jpg)"
-            />
-          </div>
-          <div>
-            <textarea
-              name="description"
-              rows="5"
-              className="border w-full p-1 my-1"
-              placeholder="Write description here"
-            ></textarea>
-          </div>
-          <div className="flex flex-col md:flex-row gap-2">
-            <input
-              type="text"
-              name="marks"
-              className="border flex-1 p-1"
-              placeholder="Marks"
-            />
-            <select name="level" className="border flex-1 p-1">
-              <option value="easy">Easy</option>
-              <option value="medium">Medium</option>
-              <option value="hard">Hard</option>
-            </select>
-            <input type="date" name="dueDate" className="border flex-1 p-1" />
-          </div>
-          <div className="flex justify-between md:justify-end gap-2">
-            <Link
-              to={"/"}
-              className="border py-2 px-10 mt-2 bg-red-600 text-white hover:bg-red-400 cursor-pointer active:scale-95 select-none"
-            >
-              Discard
-            </Link>
-            <input
-              type="submit"
-              value="Create"
-              className="border py-2 px-10 mt-2 bg-blue-600 text-white hover:bg-blue-400 cursor-pointer active:scale-95"
-            />
-          </div>
-        </form>
+    <>
+      <Helmet>
+        <title>Create Assignment</title>
+      </Helmet>
+      <div className="bg-gray-100 h-[calc(100vh-100px)] flex justify-center items-center">
+        <div className="w-11/12 md:w-1/2 mx-auto rounded-md shadow-md p-3 bg-white">
+          <h1 className="text-xl md:text-3xl font-bold mb-5">
+            Create an Assignment
+          </h1>
+          <form onSubmit={createAssignment}>
+            <div className="flex flex-col md:flex-row gap-2">
+              <input
+                type="text"
+                name="title"
+                className="p-1 w-full border"
+                placeholder="Enter title"
+              />
+              <input
+                type="text"
+                name="thumbnail"
+                className="p-1 w-full border"
+                placeholder="Enter thumbnail url (E.g. https://thumbnail-url.com/enter.jpg)"
+              />
+            </div>
+            <div>
+              <textarea
+                name="description"
+                rows="5"
+                className="border w-full p-1 my-1"
+                placeholder="Write description here"
+              ></textarea>
+            </div>
+            <div className="flex flex-col md:flex-row gap-2">
+              <input
+                type="text"
+                name="marks"
+                className="border flex-1 p-1"
+                placeholder="Marks"
+              />
+              <select name="level" className="border flex-1 p-1">
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+              </select>
+              <input type="date" name="dueDate" className="border flex-1 p-1" />
+            </div>
+            <div className="flex justify-between md:justify-end gap-2">
+              <Link
+                to={"/"}
+                className="border py-2 px-10 mt-2 bg-red-600 text-white hover:bg-red-400 cursor-pointer active:scale-95 select-none"
+              >
+                Discard
+              </Link>
+              <input
+                type="submit"
+                value="Create"
+                className="border py-2 px-10 mt-2 bg-blue-600 text-white hover:bg-blue-400 cursor-pointer active:scale-95"
+              />
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -7,6 +7,7 @@ import useAssignments from "../../hooks/useAssignments";
 import { AuthContext } from "../../context/Authentication";
 import Swal from "sweetalert2";
 import useFilter from "../../hooks/useFilter";
+import { Helmet } from "react-helmet";
 
 const AllAssignment = () => {
   const { count } = useLoaderData();
@@ -51,7 +52,7 @@ const AllAssignment = () => {
       }).then((result) => {
         if (result.isConfirmed) {
           axios
-            .delete(`http://localhost:5000/assignments/${id}`)
+            .delete(`https://rp-assignment-11.vercel.app/assignments/${id}`)
             .then((res) => {
               if (res.data?.deletedCount > 0) {
                 Swal.fire({
@@ -85,6 +86,9 @@ const AllAssignment = () => {
 
   return (
     <>
+      <Helmet>
+        <title>All Assignments</title>
+      </Helmet>
       <div className="md:w-9/12 mx-auto flex items-center justify-end my-5">
         <span className="font-bold mr-2">Filter By: </span>
         <select

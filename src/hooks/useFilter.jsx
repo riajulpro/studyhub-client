@@ -4,9 +4,7 @@ const useFilter = () => {
   const { data, isLoading, isFetching, refetch } = useQuery({
     queryKey: ["filterData"],
     queryFn: async () => {
-      const data = await fetch(
-        `http://localhost:5000/filter`
-      );
+      const data = await fetch(`https://rp-assignment-11.vercel.app/filter`);
       return await data.json();
     },
   });

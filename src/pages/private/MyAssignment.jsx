@@ -2,6 +2,7 @@ import { useContext } from "react";
 import useSubmittedData from "../../hooks/useSubmittedData";
 import { AuthContext } from "../../context/Authentication";
 import LoadingSpin from "../../components/Loading/LoadingSpin";
+import { Helmet } from "react-helmet";
 
 const MyAssignment = () => {
   const { user } = useContext(AuthContext);
@@ -17,6 +18,9 @@ const MyAssignment = () => {
 
   return (
     <>
+      <Helmet>
+        <title>My Assignments</title>
+      </Helmet>
       <div className="md:w-9/12 mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2 my-3">
         {myCompletedAssignment.map((data) => (
           <div

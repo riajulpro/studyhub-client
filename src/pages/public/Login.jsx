@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiFillHome, AiFillGithub, AiOutlineGoogle } from "react-icons/ai";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 const Login = () => {
   const { signIn, loginWithGoogle, loginWithGithub } = useContext(AuthContext);
@@ -22,7 +23,9 @@ const Login = () => {
     signIn(email, password)
       .then(() => {
         axios
-          .post("http://localhost:5000/jwt", user, { withCredentials: true })
+          .post("https://rp-assignment-11.vercel.app/jwt", user, {
+            withCredentials: true,
+          })
           .then((res) => console.log(res.data));
 
         Swal.fire({
@@ -52,7 +55,9 @@ const Login = () => {
       .then((res) => {
         const user = { email: res?.user?.email };
         axios
-          .post("http://localhost:5000/jwt", user, { withCredentials: true })
+          .post("https://rp-assignment-11.vercel.app/jwt", user, {
+            withCredentials: true,
+          })
           .then((res) => console.log(res.data));
 
         Swal.fire({
@@ -81,7 +86,9 @@ const Login = () => {
       .then((res) => {
         const user = { email: res?.user?.email };
         axios
-          .post("http://localhost:5000/jwt", user, { withCredentials: true })
+          .post("https://rp-assignment-11.vercel.app/jwt", user, {
+            withCredentials: true,
+          })
           .then((res) => console.log(res.data));
 
         Swal.fire({
@@ -107,71 +114,76 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-gray-100 flex justify-center items-center h-screen">
-      <div className="bg-white border rounded-md p-3 w-3/12 shadow-md">
-        <div className="flex justify-between">
-          <h1 className="text-2xl font-semibold mb-4">Login Now</h1>
-          <Link to={"/"}>
-            <AiFillHome className="w-7 h-7 hover:text-red-400" />
-          </Link>
-        </div>
-        <form onSubmit={login}>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            placeholder="email"
-            className="border p-1 my-1 w-full"
-          />
-          <br />
-          <input
-            type="password"
-            name="password"
-            id="password"
-            placeholder="password"
-            className="border p-1 my-1 w-full"
-          />
-          <br />
-          <input
-            type="submit"
-            value="Login"
-            className="bg-primary hover:bg-primary/75 cursor-pointer text-white border p-1 my-1 w-full"
-          />
-        </form>
-        <p>
-          <h4 className="text-center my-3 text-slate-600">Or Sign In With</h4>
-          <div className="flex gap-2 justify-center items-center">
-            <button
-              className="border p-2 flex items-center gap-2 rounded-md hover:bg-primary hover:text-white active:scale-95"
-              onClick={googleLoginFn}
-            >
-              <span>
-                <AiOutlineGoogle />
-              </span>
-              <span>Google</span>
-            </button>
-            <button
-              className="border p-2 flex items-center gap-2 rounded-md hover:bg-primary hover:text-white active:scale-95"
-              onClick={githubLoginFn}
-            >
-              <span>
-                <AiFillGithub />
-              </span>
-              <span>GitHub</span>
-            </button>
+    <>
+      <Helmet>
+        <title>Login now</title>
+      </Helmet>
+      <div className="bg-gray-100 flex justify-center items-center h-screen">
+        <div className="bg-white border rounded-md p-3 w-3/12 shadow-md">
+          <div className="flex justify-between">
+            <h1 className="text-2xl font-semibold mb-4">Login Now</h1>
+            <Link to={"/"}>
+              <AiFillHome className="w-7 h-7 hover:text-red-400" />
+            </Link>
           </div>
-        </p>
-        <p className="text-slate-600 text-center mt-3">
-          Have not an account?{" "}
-          <Link
-            to={"/register"}
-            className="text-violet-700 hover:text-violet-400"
-          >
-            Register
-          </Link>
-        </p>
+          <form onSubmit={login}>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="email"
+              className="border p-1 my-1 w-full"
+            />
+            <br />
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="password"
+              className="border p-1 my-1 w-full"
+            />
+            <br />
+            <input
+              type="submit"
+              value="Login"
+              className="bg-primary hover:bg-primary/75 cursor-pointer text-white border p-1 my-1 w-full"
+            />
+          </form>
+          <p>
+            <h4 className="text-center my-3 text-slate-600">Or Sign In With</h4>
+            <div className="flex gap-2 justify-center items-center">
+              <button
+                className="border p-2 flex items-center gap-2 rounded-md hover:bg-primary hover:text-white active:scale-95"
+                onClick={googleLoginFn}
+              >
+                <span>
+                  <AiOutlineGoogle />
+                </span>
+                <span>Google</span>
+              </button>
+              <button
+                className="border p-2 flex items-center gap-2 rounded-md hover:bg-primary hover:text-white active:scale-95"
+                onClick={githubLoginFn}
+              >
+                <span>
+                  <AiFillGithub />
+                </span>
+                <span>GitHub</span>
+              </button>
+            </div>
+          </p>
+          <p className="text-slate-600 text-center mt-3">
+            Have not an account?{" "}
+            <Link
+              to={"/register"}
+              className="text-violet-700 hover:text-violet-400"
+            >
+              Register
+            </Link>
+          </p>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
