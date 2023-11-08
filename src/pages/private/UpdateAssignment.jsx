@@ -1,14 +1,14 @@
 import axios from "axios";
-import { useState } from "react";
 import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { AuthContext } from "../../context/Authentication";
 import { Helmet } from "react-helmet";
+import { useContext } from "react";
+import { AuthContext } from "../../context/Authentication";
 
 const UpdateAssignment = () => {
   const previousData = useLoaderData();
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-  const { user } = useState(AuthContext);
 
   const {
     _id,
@@ -20,6 +20,8 @@ const UpdateAssignment = () => {
     dueDate,
     userEmail,
   } = previousData[0];
+
+  // console.log(userEmail, user?.email);
 
   const updateAssignment = (event) => {
     event.preventDefault();

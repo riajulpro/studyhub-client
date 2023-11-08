@@ -110,6 +110,7 @@ const AllAssignment = () => {
             </p>
             <h1 className="font-bold text-lg">{ass?.title}</h1>
             <p className="text-sm">Marks: {ass?.marks}</p>
+            <p className="text-sm">Created By: {ass?.userEmail}</p>
             <p className="text-sm mb-2 border-b">Level: {ass?.level}</p>
             <p className="flex justify-end">
               <Link
