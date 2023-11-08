@@ -23,7 +23,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="my-5 md:w-9/12 mx-auto border p-3 rounded-md flex gap-2">
+    <div className="my-5 md:w-9/12 mx-auto border p-3 rounded-md flex gap-2 bg-gray-50">
       <div>
         <img
           src={user?.photoURL}

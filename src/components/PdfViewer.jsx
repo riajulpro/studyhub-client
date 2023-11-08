@@ -3,7 +3,7 @@ import { Document, Page } from "react-pdf";
 
 const PdfViewer = () => {
   const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1);
+  const pageNumber = 1;
 
   const onDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages);
