@@ -1,11 +1,13 @@
 import PropTypes from "prop-types";
 import { useContext } from "react";
 import { AuthContext } from "../context/Authentication";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import LoadingSpin from "../components/Loading/LoadingSpin";
 
 const PrivateRoutes = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
+
+  const location = useLocation();
 
   if (loading) {
     return <LoadingSpin />;
@@ -15,7 +17,7 @@ const PrivateRoutes = ({ children }) => {
     return children;
   }
 
-  return <Navigate to={"/login"}></Navigate>;
+  return <Navigate to={"/login"} state={location.pathname}></Navigate>;
 };
 
 PrivateRoutes.propTypes = {

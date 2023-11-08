@@ -1,13 +1,13 @@
 import { useContext } from "react";
 import { AuthContext } from "../../context/Authentication";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiFillHome, AiFillGithub, AiOutlineGoogle } from "react-icons/ai";
 import axios from "axios";
 
 const Login = () => {
   const { signIn } = useContext(AuthContext);
-
   const navigate = useNavigate();
+  const location = useLocation();
 
   const login = (event) => {
     event.preventDefault();
@@ -26,7 +26,11 @@ const Login = () => {
 
         alert("login successful");
 
-        navigate("/");
+        if (location?.state) {
+          navigate(location.state);
+        } else {
+          navigate("/");
+        }
       })
       .catch((error) => {
         alert("user or password wrong");

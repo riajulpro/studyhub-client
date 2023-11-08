@@ -1,12 +1,15 @@
 import { Link, useLoaderData } from "react-router-dom";
 // import useAssignments from "../../hooks/useAssignments";
 import Loading from "../../components/Loading/Loading";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
 import useAssignments from "../../hooks/useAssignments";
+import { AuthContext } from "../../context/Authentication";
+import Swal from "sweetalert2";
 
 const AllAssignment = () => {
   const { count } = useLoaderData();
+  const { user } = useContext(AuthContext);
   const item = 9;
   const pages = [...Array(Math.ceil(count / item)).keys()];
   const [currentPage, setCurrentPage] = useState(0);
@@ -17,13 +20,41 @@ const AllAssignment = () => {
     refetch,
   } = useAssignments(currentPage, item);
 
-  const deleteAnItem = (id) => {
-    axios.delete(`http://localhost:5000/assignments/${id}`).then((res) => {
-      if (res.data?.deletedCount > 0) {
-        alert("Successfully deleted");
-        refetch();
-      }
-    });
+  const deleteAnItem = (id, email) => {
+    if (user.email === email) {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios
+            .delete(`http://localhost:5000/assignments/${id}`)
+            .then((res) => {
+              if (res.data?.deletedCount > 0) {
+                Swal.fire({
+                  title: "Deleted!",
+                  text: "Your file has been deleted.",
+                  icon: "success",
+                });
+                refetch();
+              }
+            });
+        }
+      });
+    } else {
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: "You have not access to delete the assignment.",
+        showConfirmButton: false,
+        timer: 1750,
+      });
+    }
   };
 
   // const { data: assignments, isLoading, refetch } = useAssignments();
@@ -41,24 +72,28 @@ const AllAssignment = () => {
       <div className="md:w-9/12 mx-auto grid gap-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-5">
         {assignments?.map((ass) => (
           <div key={ass._id} className="bg-gray-100 rounded-md p-2">
+            <p>
+              <img src={ass?.thumbnail} alt="" className="rounded-md" />
+            </p>
             <h1 className="font-bold text-lg">{ass?.title}</h1>
-            <p className="mb-2 border-b">{ass?.description}</p>
+            <p className="text-sm">Marks: {ass?.marks}</p>
+            <p className="text-sm mb-2 border-b">Level: {ass?.level}</p>
             <p className="flex justify-end">
               <Link
                 to={`/assignment-details/${ass._id}`}
-                className="bg-violet-400 text-white px-3 py-1 mr-1 hover:bg-violet-300 active:scale-95 rounded"
+                className="bg-primary text-white px-3 py-1 mr-1 hover:bg-violet-300 active:scale-95 rounded"
               >
                 View
               </Link>
               <Link
                 to={`/update-assignment/${ass._id}`}
-                className="bg-violet-400 text-white px-3 py-1 mr-1 hover:bg-violet-300 active:scale-95 rounded"
+                className="bg-primary text-white px-3 py-1 mr-1 hover:bg-violet-300 active:scale-95 rounded"
               >
                 Edit
               </Link>
               <button
-                className="bg-violet-400 text-white px-3 py-1 mr-1 hover:bg-violet-300 active:scale-95 rounded"
-                onClick={() => deleteAnItem(ass._id)}
+                className="bg-primary text-white px-3 py-1 mr-1 hover:bg-violet-300 active:scale-95 rounded"
+                onClick={() => deleteAnItem(ass?._id, ass?.userEmail)}
               >
                 Delete
               </button>

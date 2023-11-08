@@ -1,12 +1,24 @@
 import axios from "axios";
+import { useState } from "react";
 import { Link, useLoaderData, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import { AuthContext } from "../../context/Authentication";
 
 const UpdateAssignment = () => {
   const previousData = useLoaderData();
   const navigate = useNavigate();
+  const { user } = useState(AuthContext);
 
-  const { _id, title, thumbnail, description, marks, level, dueDate } =
-    previousData[0];
+  const {
+    _id,
+    title,
+    thumbnail,
+    description,
+    marks,
+    level,
+    dueDate,
+    userEmail,
+  } = previousData[0];
 
   const updateAssignment = (event) => {
     event.preventDefault();
@@ -29,13 +41,36 @@ const UpdateAssignment = () => {
       dueDate,
     };
 
-    axios
-      .put(`http://localhost:5000/assignment/${_id}`, updatedData)
-      .then((res) => {
-        if (res.data.modifiedCount > 0) {
-          navigate("/all-assignment");
+    if (user?.email === userEmail) {
+      Swal.fire({
+        title: "Do you want to update the changes?",
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Update",
+        denyButtonText: `Don't update`,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios
+            .put(`http://localhost:5000/assignment/${_id}`, updatedData)
+            .then((res) => {
+              if (res.data.modifiedCount > 0) {
+                Swal.fire("Assignment Successfully Updated!", "", "success");
+                navigate("/all-assignment");
+              }
+            });
+        } else if (result.isDenied) {
+          Swal.fire("Changes are not updated", "", "info");
         }
       });
+    } else {
+      Swal.fire({
+        position: "top-end",
+        icon: "warning",
+        title: "You haven't the permission to update this.",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
   };
 
   return (

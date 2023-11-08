@@ -1,11 +1,14 @@
 import { useContext, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/Authentication";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const AssignmentDetails = () => {
   const [activateModal, setActivateModal] = useState(false);
   const { user } = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   const assignmentDetails = useLoaderData();
   const previousData = assignmentDetails[0];
@@ -29,29 +32,52 @@ const AssignmentDetails = () => {
       examinee: user?.displayName,
     };
 
-    axios
-      .post("http://localhost:5000/submitted", submittedData)
-      .then((res) => {
-        console.log(res);
-        if (res?.data?.acknowledged) {
-          setActivateModal(false);
-        }
-      })
-      .catch((err) => console.log(err));
+    if (pdf === "" || note === "") {
+      Swal.fire({
+        title: "Warning!",
+        text: "You can't put the marks or feedback field empty.",
+        icon: "warning",
+      });
+    } else {
+      axios
+        .post("http://localhost:5000/submitted", submittedData)
+        .then((res) => {
+          if (res?.data?.acknowledged) {
+            setActivateModal(false);
+            Swal.fire({
+              title: "Submitted Successful!",
+              text: "Your assignment has been submitted.",
+              icon: "success",
+            });
+            navigate("/submitted-assignment");
+          }
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   return (
     <div className="md:w-9/12 mx-auto my-5 border rounded-md p-3">
       {assignmentDetails.map((data) => (
         <div key={data._id}>
+          <div>
+            <img src={data?.thumbnail} alt="" className="w-full object-cover" />
+          </div>
           <h1 className="font-bold text-2xl">{data?.title}</h1>
-          <p>{data?.description}</p>
-          <p>{data?.level}</p>
-          <p>{data?.dueDate}</p>
-          <p>{data?.userEmail}</p>
+          <p>
+            <span className="font-semibold">Description:</span>{" "}
+            {data?.description}
+          </p>
+          <p>
+            <span className="font-semibold">Difficulty Level:</span>{" "}
+            {data?.level}
+          </p>
+          <p>
+            <span className="font-semibold">DueDate:</span> {data?.dueDate}
+          </p>
           <p>
             <button
-              className="bg-violet-400 text-white px-3 py-1 mr-1 hover:bg-violet-300 active:scale-95 rounded"
+              className="bg-primary text-white px-3 py-1 mr-1 hover:bg-primary/75 active:scale-95 rounded mt-3"
               onClick={() => setActivateModal(true)}
             >
               Take the Assignment
@@ -88,11 +114,11 @@ const AssignmentDetails = () => {
                   <input
                     type="submit"
                     value="Submit"
-                    className="bg-green-600 hover:bg-green-400 active:scale-95 cursor-pointer text-white font-semibold px-3 py-1 mr-2"
+                    className="bg-primary hover:bg-primary/75 active:scale-95 cursor-pointer text-white font-semibold px-3 py-1 mr-2"
                   />
                   <button
                     onClick={() => setActivateModal(false)}
-                    className="bg-red-600 hover:bg-red-400 cursor-pointer text-white font-semibold px-3 py-1 active:scale-95"
+                    className="bg-gray-100 hover:bg-gray-50 cursor-pointer font-semibold px-3 py-1 active:scale-95"
                   >
                     Close
                   </button>

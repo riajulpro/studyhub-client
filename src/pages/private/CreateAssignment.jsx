@@ -1,10 +1,13 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/Authentication";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const CreateAssignment = () => {
   const { user } = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   const createAssignment = (event) => {
     event.preventDefault();
@@ -29,7 +32,15 @@ const CreateAssignment = () => {
 
     axios
       .post("http://localhost:5000/assignment", assignment)
-      .then((res) => console.log(res))
+      .then(() => {
+        Swal.fire({
+          title: "Succeed",
+          text: "You have successfully created the assignment.",
+          icon: "success",
+          confirmButtonText: "Okay",
+        });
+        navigate("/all-assignment");
+      })
       .catch((err) => console.log(err));
 
     form.title.value = "";
@@ -58,7 +69,7 @@ const CreateAssignment = () => {
               type="text"
               name="thumbnail"
               className="p-1 w-full border"
-              placeholder="https://thumbnail-url.com/enter.jpg"
+              placeholder="Enter thumbnail url (E.g. https://thumbnail-url.com/enter.jpg)"
             />
           </div>
           <div>

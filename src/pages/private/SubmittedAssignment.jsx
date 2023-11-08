@@ -3,12 +3,14 @@ import LoadingSpin from "../../components/Loading/LoadingSpin";
 import useSubmittedData from "../../hooks/useSubmittedData";
 import { AuthContext } from "../../context/Authentication";
 import axios from "axios";
+import Swal from "sweetalert2";
+import { AiOutlineDelete } from "react-icons/ai";
 
 const SubmittedAssignment = () => {
   const { user } = useContext(AuthContext);
   const [activateModal, setActivateModal] = useState(false);
 
-  const { data: submittedData, isLoading } = useSubmittedData();
+  const { data: submittedData, isLoading, refetch } = useSubmittedData();
   if (isLoading) {
     return <LoadingSpin />;
   }
@@ -25,14 +27,48 @@ const SubmittedAssignment = () => {
     const form = event.target;
     const givenMarks = form.givenMarks.value;
     const feedback = form.feedback.value;
-
     const reqBody = { feedback, givenMarks, status: "completed" };
 
-    console.log("marks has been added", _id, reqBody);
+    if (givenMarks === "" || feedback === "") {
+      Swal.fire({
+        title: "Warning!",
+        text: "You can't put the marks or feedback field empty.",
+        icon: "warning",
+      });
+    } else {
+      axios.put(`http://localhost:5000/submitted/${_id}`, reqBody).then(() => {
+        Swal.fire({
+          title: "Successfully Done!",
+          text: "Mark has been added to the assignment",
+          icon: "success",
+        });
+      });
+    }
+  };
 
-    axios
-      .put(`http://localhost:5000/submitted/${_id}`, reqBody)
-      .then((res) => console.log(res.data));
+  const deleteAnItem = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.delete(`http://localhost:5000/submitted/${id}`).then((res) => {
+          if (res.data?.deletedCount > 0) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+            refetch();
+          }
+        });
+      }
+    });
   };
 
   return (
@@ -43,9 +79,15 @@ const SubmittedAssignment = () => {
             <p className="font-semibold">{data.title}</p>
             <p className="text-sm">Examinee: {data.examinee}</p>
             <p className="border-b mb-2">Marks: {data.marks}</p>
-            <p className="flex justify-end">
+            <p className="flex items-center justify-between">
               <button
-                className="bg-violet-400 hover:bg-violet-200 cursor-pointer text-white py-1 px-3 font-semibold rounded-sm active:scale-95"
+                onClick={() => deleteAnItem(data._id)}
+                className="hover:scale-105"
+              >
+                <AiOutlineDelete />
+              </button>
+              <button
+                className="bg-primary hover:bg-primary/75 cursor-pointer text-white py-1 px-3 font-semibold rounded-sm active:scale-95"
                 onClick={() => setActivateModal(true)}
               >
                 Give mark
@@ -104,11 +146,11 @@ const SubmittedAssignment = () => {
                           <input
                             type="submit"
                             value="Submit"
-                            className="bg-green-600 hover:bg-green-400 active:scale-95 cursor-pointer text-white font-semibold px-3 py-1 mr-2"
+                            className="bg-primary hover:bg-primary/75 active:scale-95 cursor-pointer text-white font-semibold px-3 py-1 mr-2"
                           />
                           <button
                             onClick={() => setActivateModal(false)}
-                            className="bg-red-600 hover:bg-red-400 cursor-pointer text-white font-semibold px-3 py-1 active:scale-95"
+                            className="bg-gray-100 hover:bg-gray-50 cursor-pointer font-semibold px-3 py-1 active:scale-95"
                           >
                             Close
                           </button>
