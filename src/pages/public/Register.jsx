@@ -4,6 +4,7 @@ import { AuthContext } from "../../context/Authentication";
 import { updateProfile } from "firebase/auth";
 import auth from "../../firebase/firebase.config";
 import { AiFillHome, AiFillGithub, AiOutlineGoogle } from "react-icons/ai";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const { createAccount } = useContext(AuthContext);
@@ -19,6 +20,28 @@ const Register = () => {
     const password = form.password.value;
     const photo = form.photo.value;
 
+    // Email validation using a regular expression
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      Swal.fire({
+        title: "Invalid Email!",
+        text: "You must enter a valid email address",
+        icon: "warning",
+      });
+      return;
+    }
+
+    // Password validation
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.{6,})/;
+    if (!passwordRegex.test(password)) {
+      Swal.fire({
+        title: "Invalid Password!",
+        text: "You must enter 6 characters include with: a capital letter and a special character",
+        icon: "warning",
+      });
+      return;
+    }
+
     createAccount(email, password)
       .then(() => {
         updateProfile(auth.currentUser, {
@@ -26,6 +49,11 @@ const Register = () => {
           photoURL: photo,
         })
           .then(() => {
+            Swal.fire({
+              title: "Successfully Registered!",
+              text: "Account created successfully now login please.",
+              icon: "success",
+            });
             navigate("/login");
           })
           .catch((error) => console.log(error));
@@ -54,6 +82,7 @@ const Register = () => {
             id=""
             placeholder="username"
             className="border p-1 my-1 w-full"
+            required
           />
           <br />
           <input

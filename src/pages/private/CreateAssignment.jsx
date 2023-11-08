@@ -20,6 +20,61 @@ const CreateAssignment = () => {
     const level = form.level.value;
     const dueDate = form.dueDate.value;
 
+    // Validity Checking for each of the field
+    if (title.trim() === "") {
+      Swal.fire({
+        title: "Invalid Title!",
+        text: "Title cannot be empty",
+        icon: "warning",
+      });
+      return;
+    }
+
+    if (thumbnail.trim() === "") {
+      Swal.fire({
+        title: "Invalid Thumbnail URL!",
+        text: "Thumbnail URL cannot be empty",
+        icon: "warning",
+      });
+      return;
+    }
+
+    if (description.trim() === "") {
+      Swal.fire({
+        title: "Invalid Description!",
+        text: "Description cannot be empty",
+        icon: "warning",
+      });
+      return;
+    }
+
+    if (isNaN(parseInt(marks)) || parseInt(marks) <= 0) {
+      Swal.fire({
+        title: "Invalid Marks!",
+        text: "Marks must be a positive number",
+        icon: "warning",
+      });
+      return;
+    }
+
+    if (level.trim() === "") {
+      Swal.fire({
+        title: "Invalid Level!",
+        text: "Level cannot be empty",
+        icon: "warning",
+      });
+      return;
+    }
+
+    if (dueDate.trim() === "") {
+      Swal.fire({
+        title: "Invalid Due Date!",
+        text: "Due date cannot be empty",
+        icon: "warning",
+      });
+      return;
+    }
+
     const assignment = {
       title,
       thumbnail,

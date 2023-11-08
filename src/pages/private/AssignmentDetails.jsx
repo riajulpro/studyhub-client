@@ -32,7 +32,7 @@ const AssignmentDetails = () => {
       examinee: user?.displayName,
     };
 
-    if (pdf === "" || note === "") {
+    if (pdf.trim() === "" || note.trim() === "") {
       Swal.fire({
         title: "Warning!",
         text: "You can't put the marks or feedback field empty.",

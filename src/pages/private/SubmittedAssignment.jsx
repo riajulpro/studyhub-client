@@ -29,7 +29,7 @@ const SubmittedAssignment = () => {
     const feedback = form.feedback.value;
     const reqBody = { feedback, givenMarks, status: "completed" };
 
-    if (givenMarks === "" || feedback === "") {
+    if (givenMarks.trim() === "" || feedback.trim() === "") {
       Swal.fire({
         title: "Warning!",
         text: "You can't put the marks or feedback field empty.",
