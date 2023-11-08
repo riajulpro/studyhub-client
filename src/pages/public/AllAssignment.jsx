@@ -1,30 +1,29 @@
 import { Link, useLoaderData } from "react-router-dom";
 // import useAssignments from "../../hooks/useAssignments";
 import Loading from "../../components/Loading/Loading";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
+import useAssignments from "../../hooks/useAssignments";
 
 const AllAssignment = () => {
   const { count } = useLoaderData();
-  const pages = [...Array(Math.ceil(count / 10)).keys()];
+  const item = 9;
+  const pages = [...Array(Math.ceil(count / item)).keys()];
   const [currentPage, setCurrentPage] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
 
-  const [assignments, setAssignments] = useState([]);
-
-  useEffect(() => {
-    fetch(`http://localhost:5000/assignments?page=${currentPage}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setAssignments(data);
-        setIsLoading(false);
-      });
-  }, [currentPage]);
+  const {
+    data: assignments,
+    isLoading,
+    refetch,
+  } = useAssignments(currentPage, item);
 
   const deleteAnItem = (id) => {
-    axios
-      .delete(`http://localhost:5000/assignments/${id}`)
-      .then((res) => console.log(res.data));
+    axios.delete(`http://localhost:5000/assignments/${id}`).then((res) => {
+      if (res.data?.deletedCount > 0) {
+        alert("Successfully deleted");
+        refetch();
+      }
+    });
   };
 
   // const { data: assignments, isLoading, refetch } = useAssignments();

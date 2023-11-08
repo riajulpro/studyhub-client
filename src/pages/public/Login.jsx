@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../context/Authentication";
 import { Link, useNavigate } from "react-router-dom";
 import { AiFillHome, AiFillGithub, AiOutlineGoogle } from "react-icons/ai";
+import axios from "axios";
 
 const Login = () => {
   const { signIn } = useContext(AuthContext);
@@ -10,16 +11,19 @@ const Login = () => {
 
   const login = (event) => {
     event.preventDefault();
-    console.log("login form is submitted");
 
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
 
-    console.log(email, password);
+    const user = { email };
 
     signIn(email, password)
       .then(() => {
+        axios
+          .post("http://localhost:5000/jwt", user, { withCredentials: true })
+          .then((res) => console.log(res.data));
+
         alert("login successful");
         navigate("/");
       })
