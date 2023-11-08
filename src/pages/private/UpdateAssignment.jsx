@@ -52,7 +52,10 @@ const UpdateAssignment = () => {
       }).then((result) => {
         if (result.isConfirmed) {
           axios
-            .put(`http://localhost:5000/assignment/${_id}`, updatedData)
+            .put(
+              `https://rp-assignment-11.vercel.app/assignment/${_id}`,
+              updatedData
+            )
             .then((res) => {
               if (res.data.modifiedCount > 0) {
                 Swal.fire("Assignment Successfully Updated!", "", "success");

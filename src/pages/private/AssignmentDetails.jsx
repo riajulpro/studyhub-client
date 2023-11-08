@@ -41,7 +41,7 @@ const AssignmentDetails = () => {
       });
     } else {
       axios
-        .post("http://localhost:5000/submitted", submittedData)
+        .post("https://rp-assignment-11.vercel.app/submitted", submittedData)
         .then((res) => {
           if (res?.data?.acknowledged) {
             setActivateModal(false);

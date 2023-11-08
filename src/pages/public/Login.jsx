@@ -23,7 +23,7 @@ const Login = () => {
     signIn(email, password)
       .then(() => {
         axios
-          .post("http://localhost:5000/jwt", user, {
+          .post("https://rp-assignment-11.vercel.app/jwt", user, {
             withCredentials: true,
           })
           .then((res) => console.log(res.data));
@@ -55,7 +55,7 @@ const Login = () => {
       .then((res) => {
         const user = { email: res?.user?.email };
         axios
-          .post("http://localhost:5000/jwt", user, {
+          .post("https://rp-assignment-11.vercel.app/jwt", user, {
             withCredentials: true,
           })
           .then((res) => console.log(res.data));
@@ -86,7 +86,7 @@ const Login = () => {
       .then((res) => {
         const user = { email: res?.user?.email };
         axios
-          .post("http://localhost:5000/jwt", user, {
+          .post("https://rp-assignment-11.vercel.app/jwt", user, {
             withCredentials: true,
           })
           .then((res) => console.log(res.data));

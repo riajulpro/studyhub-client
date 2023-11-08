@@ -41,14 +41,16 @@ const SubmittedAssignment = () => {
         icon: "warning",
       });
     } else {
-      axios.put(`http://localhost:5000/submitted/${_id}`, reqBody).then(() => {
-        Swal.fire({
-          title: "Successfully Done!",
-          text: "Mark has been added to the assignment",
-          icon: "success",
+      axios
+        .put(`https://rp-assignment-11.vercel.app/submitted/${_id}`, reqBody)
+        .then(() => {
+          Swal.fire({
+            title: "Successfully Done!",
+            text: "Mark has been added to the assignment",
+            icon: "success",
+          });
+          navigate("/my-assignment");
         });
-        navigate("/my-assignment");
-      });
     }
   };
 
@@ -63,16 +65,18 @@ const SubmittedAssignment = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:5000/submitted/${id}`).then((res) => {
-          if (res.data?.deletedCount > 0) {
-            Swal.fire({
-              title: "Deleted!",
-              text: "Your file has been deleted.",
-              icon: "success",
-            });
-            refetch();
-          }
-        });
+        axios
+          .delete(`https://rp-assignment-11.vercel.app/submitted/${id}`)
+          .then((res) => {
+            if (res.data?.deletedCount > 0) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success",
+              });
+              refetch();
+            }
+          });
       }
     });
   };
