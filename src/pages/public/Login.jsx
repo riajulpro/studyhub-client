@@ -49,7 +49,12 @@ const Login = () => {
 
   const googleLoginFn = () => {
     loginWithGoogle()
-      .then(() => {
+      .then((res) => {
+        const user = { email: res?.user?.email };
+        axios
+          .post("http://localhost:5000/jwt", user, { withCredentials: true })
+          .then((res) => console.log(res.data));
+
         Swal.fire({
           title: "Successfully Login",
           text: "You can access all the feature now",
@@ -73,7 +78,12 @@ const Login = () => {
   };
   const githubLoginFn = () => {
     loginWithGithub()
-      .then(() => {
+      .then((res) => {
+        const user = { email: res?.user?.email };
+        axios
+          .post("http://localhost:5000/jwt", user, { withCredentials: true })
+          .then((res) => console.log(res.data));
+
         Swal.fire({
           title: "Successfully Login",
           text: "You can access all the feature now",

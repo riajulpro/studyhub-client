@@ -33,7 +33,13 @@ const AllAssignment = () => {
   };
 
   const deleteAnItem = (id, email) => {
-    if (user.email === email) {
+    if (!user) {
+      Swal.fire({
+        title: "Warning!",
+        text: "You must login to delete file",
+        icon: "warning",
+      });
+    } else if (user.email === email) {
       Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
