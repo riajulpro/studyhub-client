@@ -87,7 +87,7 @@ const CreateAssignment = () => {
     };
 
     axios
-      .post("https://rp-assignment-11.vercel.app/assignment", assignment)
+      .post("http://localhost:5000/assignment", assignment)
       .then(() => {
         Swal.fire({
           title: "Succeed",

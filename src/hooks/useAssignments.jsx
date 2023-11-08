@@ -5,7 +5,7 @@ const useAssignments = (currentPage, item) => {
     queryKey: ["assignments", currentPage, item],
     queryFn: async () => {
       const data = await fetch(
-        `https://rp-assignment-11.vercel.app/assignments?page=${currentPage}&size=${item}`
+        `http://localhost:5000/assignments?page=${currentPage}&size=${item}`
       );
       return await data.json();
     },

@@ -4,12 +4,9 @@ const useSubmittedData = () => {
   const { data, isLoading, isFetching, refetch } = useQuery({
     queryKey: ["submittedData"],
     queryFn: async () => {
-      const data = await fetch(
-        "https://rp-assignment-11.vercel.app/submitted",
-        {
-          credentials: "include",
-        }
-      );
+      const data = await fetch("http://localhost:5000/submitted", {
+        credentials: "include",
+      });
       return await data.json();
     },
   });

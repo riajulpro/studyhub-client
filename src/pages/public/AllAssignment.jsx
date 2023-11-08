@@ -52,7 +52,7 @@ const AllAssignment = () => {
       }).then((result) => {
         if (result.isConfirmed) {
           axios
-            .delete(`https://rp-assignment-11.vercel.app/assignments/${id}`)
+            .delete(`http://localhost:5000/assignments/${id}`)
             .then((res) => {
               if (res.data?.deletedCount > 0) {
                 Swal.fire({

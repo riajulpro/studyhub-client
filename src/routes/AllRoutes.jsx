@@ -26,8 +26,7 @@ const router = createBrowserRouter([
       {
         path: "/all-assignment",
         element: <AllAssignment />,
-        loader: () =>
-          fetch("https://rp-assignment-11.vercel.app/documentCount"),
+        loader: () => fetch("http://localhost:5000/documentCount"),
       },
       {
         path: "/create-assignment",
@@ -45,7 +44,7 @@ const router = createBrowserRouter([
           </PrivateRoutes>
         ),
         loader: ({ params }) =>
-          fetch(`https://rp-assignment-11.vercel.app/assignment/${params.id}`),
+          fetch(`http://localhost:5000/assignment/${params.id}`),
       },
       {
         path: "/assignment-details/:id",
@@ -55,7 +54,7 @@ const router = createBrowserRouter([
           </PrivateRoutes>
         ),
         loader: ({ params }) =>
-          fetch(`https://rp-assignment-11.vercel.app/assignment/${params.id}`),
+          fetch(`http://localhost:5000/assignment/${params.id}`),
       },
       {
         path: "/submitted-assignment",
