@@ -8,7 +8,7 @@ const Header = () => {
         <div className="hidden lg:block font-bold text-2xl">StudyHub</div>
         <Navbar />
       </header>
-      <header className="bg-[#1D3557] text-white md:block lg:hidden sticky top-0">
+      <header className="bg-[#1D3557] text-white md:block lg:hidden sticky top-0 z-30">
         <div className="w-9/12 mx-auto p-3">
           <Navbar />
         </div>

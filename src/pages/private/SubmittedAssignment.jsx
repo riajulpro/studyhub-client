@@ -6,6 +6,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { AiOutlineDelete } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import PdfViewer from "../../components/PdfViewer";
 
 const SubmittedAssignment = () => {
   const { user } = useContext(AuthContext);
@@ -103,6 +104,9 @@ const SubmittedAssignment = () => {
                   <div className="fixed bg-white w-2/3 md:w-1/2 h-auto top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-5 rounded-md">
                     <div>
                       <div className="bg-gray-50 p-1 border rounded-sm mb-3">
+                        <div className="border-b">
+                          <PdfViewer pdfUrl={data?.pdf} />
+                        </div>
                         <p>
                           <span className="font-semibold">PDF:</span>{" "}
                           <a

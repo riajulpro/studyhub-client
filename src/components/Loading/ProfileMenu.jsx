@@ -55,6 +55,9 @@ function ProfileMenu() {
             tabIndex="-1"
           >
             <div className="py-1" role="none">
+              <span className="text-primary px-4 py-2 font-semibold">
+                {user?.displayName}
+              </span>
               <Link
                 to={"/profile"}
                 className="text-gray-700 block px-4 py-2 text-sm"
@@ -64,7 +67,6 @@ function ProfileMenu() {
               >
                 Profile
               </Link>
-
               <button
                 type="submit"
                 className="text-gray-700 block w-full px-4 py-2 text-left text-sm"

@@ -45,7 +45,10 @@ const Faq = () => {
         </h2>
         <div className="grid grid-cols-1 gap-1">
           {faqData.map((item, index) => (
-            <div key={index} className="p-4 bg-white shadow-md rounded">
+            <div
+              key={index}
+              className="p-4 bg-white shadow-md rounded border-b-2 border-primary"
+            >
               <h3 className="text-xl font-semibold mb-2">{item.question}</h3>
               <p>{item.answer}</p>
             </div>
