@@ -6,7 +6,7 @@ const Footer = () => {
   const { user } = useContext(AuthContext);
 
   return (
-    <footer className="bg-gray-800 text-white py-6 text-center">
+    <footer className="bg-footer text-white py-6 text-center">
       <div className="md:w-9/12 mx-auto">
         <div className="flex flex-col md:flex-row justify-center mt-4">
           <Link to="/" className="mx-2 hover:scale-105">

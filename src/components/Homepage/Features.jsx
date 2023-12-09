@@ -1,4 +1,5 @@
 import FeatureIcon from "../../assets/icons/features.svg";
+import { motion } from "framer-motion";
 
 const Features = () => {
   const features = [
@@ -38,16 +39,21 @@ const Features = () => {
         <h2 className="text-3xl font-bold mb-8 text-center">Key Features</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
-            <div
+            <motion.div
+              initial={{ scale: 0, rotate: -15 }}
+              whileInView={{ scale: 1, rotate: 0 }}
+              whileHover={{ scale: 1.02 }}
+              animate={{ scale: 0 }}
+              transition={{ duration: 0.5, ease: "easeIn" }}
               key={index}
-              className="p-3 bg-gray-50 shadow-md rounded hover:scale-105 duration-75 ease-in border-t-8 border-primary"
+              className="p-3 bg-secondary shadow-md rounded border-t-8 border-primary border"
             >
               <img src={FeatureIcon} alt="" className="h-12 w-12" />
               <h3 className="text-primary text-xl font-semibold mb-2">
                 {feature.title}
               </h3>
               <p>{feature.description}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

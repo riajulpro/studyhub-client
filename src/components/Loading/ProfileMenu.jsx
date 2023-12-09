@@ -3,6 +3,7 @@ import { AuthContext } from "../../context/Authentication";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import ProfilePicture from "../../assets/icons/profile.svg";
+import { motion } from "framer-motion";
 
 function ProfileMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,7 +48,9 @@ function ProfileMenu() {
         </div>
 
         {isOpen && (
-          <div
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
             className="absolute right-0 z-20 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
             role="menu"
             aria-orientation="vertical"
@@ -55,7 +58,7 @@ function ProfileMenu() {
             tabIndex="-1"
           >
             <div className="py-1" role="none">
-              <span className="text-primary px-4 py-2 font-semibold">
+              <span className="text-darkBlue px-4 py-2 font-semibold">
                 {user?.displayName}
               </span>
               <Link
@@ -78,7 +81,7 @@ function ProfileMenu() {
                 Sign out
               </button>
             </div>
-          </div>
+          </motion.div>
         )}
       </div>
     </div>

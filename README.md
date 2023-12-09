@@ -1,4 +1,7 @@
-<h1>Features of the Website:</h1>
+# StudyHub
+
+## Features of the Website:
+
 <ul>
 <li>This is an online group study website. You can add assignment if you are a login user.</li>
 <li>You can view, update and delete the data if you are logged in user.</li>
@@ -9,5 +12,10 @@
 <li>There are the options to make sure you really want to delete or update any data when you will try to update or delete assignments.</li>
 </ul>
 
-<h1>Live Link:</h1>
-<a href="https://riajul-pro-authentication.web.app">click here to browse</a>
+## Technologies that has been used
+
+[![Technologies](https://skillicons.dev/icons?i=js,html,css,tailwind,react,mongodb,nodejs)](https://skillicons.dev)
+
+## Essential Links
+
+- Links: [Live Links](https://riajul-pro-authentication.web.app) | [Server side code](https://github.com/riajulpro/studyhub-server.git)

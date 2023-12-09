@@ -104,7 +104,10 @@ const AllAssignment = () => {
       </div>
       <div className="md:w-9/12 mx-auto grid gap-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {toShow?.map((ass) => (
-          <div key={ass._id} className="bg-gray-100 rounded-md p-2">
+          <div
+            key={ass._id}
+            className="bg-gray-100 dark:bg-footer rounded-md p-2"
+          >
             <p>
               <img src={ass?.thumbnail} alt="" className="rounded-md" />
             </p>
@@ -114,18 +117,18 @@ const AllAssignment = () => {
             <p className="flex justify-end">
               <Link
                 to={`/assignment-details/${ass._id}`}
-                className="bg-primary text-white px-3 py-1 mr-1 hover:bg-violet-300 active:scale-95 rounded"
+                className="bg-darkBlue text-white px-3 py-1 mr-1 hover:bg-darkBlue/75 active:scale-95 rounded"
               >
                 View
               </Link>
               <Link
                 to={`/update-assignment/${ass._id}`}
-                className="bg-primary text-white px-3 py-1 mr-1 hover:bg-violet-300 active:scale-95 rounded"
+                className="bg-darkBlue text-white px-3 py-1 mr-1 hover:bg-darkBlue/75 active:scale-95 rounded"
               >
                 Edit
               </Link>
               <button
-                className="bg-primary text-white px-3 py-1 mr-1 hover:bg-violet-300 active:scale-95 rounded"
+                className="bg-darkBlue text-white px-3 py-1 mr-1 hover:bg-darkBlue/75 active:scale-95 rounded"
                 onClick={() => deleteAnItem(ass?._id, ass?.userEmail)}
               >
                 Delete

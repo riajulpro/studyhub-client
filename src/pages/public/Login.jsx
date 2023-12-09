@@ -146,14 +146,14 @@ const Login = () => {
             <input
               type="submit"
               value="Login"
-              className="bg-primary hover:bg-primary/75 cursor-pointer text-white border p-1 my-1 w-full"
+              className="bg-darkBlue hover:bg-darkBlue/75 cursor-pointer text-white border p-1 my-1 w-full"
             />
           </form>
           <p>
             <h4 className="text-center my-3 text-slate-600">Or Sign In With</h4>
             <div className="flex gap-2 justify-center items-center">
               <button
-                className="border p-2 flex items-center gap-2 rounded-md hover:bg-primary hover:text-white active:scale-95"
+                className="border p-2 flex items-center gap-2 rounded-md hover:bg-darkBlue hover:text-white active:scale-95"
                 onClick={googleLoginFn}
               >
                 <span>
@@ -162,7 +162,7 @@ const Login = () => {
                 <span>Google</span>
               </button>
               <button
-                className="border p-2 flex items-center gap-2 rounded-md hover:bg-primary hover:text-white active:scale-95"
+                className="border p-2 flex items-center gap-2 rounded-md hover:bg-darkBlue hover:text-white active:scale-95"
                 onClick={githubLoginFn}
               >
                 <span>

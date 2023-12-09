@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import EventIcon from "../../assets/icons/events.svg";
 
 const UpcomingEvents = () => {
@@ -28,16 +29,20 @@ const UpcomingEvents = () => {
         <h2 className="text-3xl font-bold mb-8 text-center">Upcoming Events</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {events.map((event, index) => (
-            <div
+            <motion.div
               key={index}
-              className="p-4 bg-gray-50 shadow-md rounded hover:scale-105 duration-75 ease-in border-l-4 border-primary"
+              initial={{ scale: 0 }}
+              whileInView={{ scale: 1 }}
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+              className="p-4 bg-secondary shadow-md rounded border-l-4 border-darkBlue border"
             >
               <img src={EventIcon} alt="" className="w-12 h-12" />
               <h3 className="text-xl font-semibold mb-1">{event.title}</h3>
               <p>Date: {event.date}</p>
               <p>Time: {event.time}</p>
               <p>Location: {event.location}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

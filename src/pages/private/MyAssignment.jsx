@@ -27,8 +27,8 @@ const MyAssignment = () => {
             key={data._id}
             className={
               data.status === "completed"
-                ? "bg-gray-100 p-2 border rounded-md"
-                : "bg-gray-50 p-2 border rounded-md"
+                ? "bg-gray-100 dark:bg-footer p-2 border rounded-md"
+                : "bg-gray-50 dark:bg-darkBlue p-2 border rounded-md"
             }
           >
             <p className="font-semibold">{data.title}</p>

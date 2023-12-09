@@ -25,10 +25,10 @@ const Profile = () => {
 
   return (
     <>
-    <Helmet>
-      <title>Profile</title>
-    </Helmet>
-      <div className="my-5 md:w-9/12 mx-auto border p-3 rounded-md flex gap-2 bg-gray-50">
+      <Helmet>
+        <title>Profile</title>
+      </Helmet>
+      <div className="my-5 md:w-9/12 mx-auto border p-3 rounded-md flex gap-2 bg-secondary">
         <div>
           <img
             src={user?.photoURL}
@@ -43,7 +43,7 @@ const Profile = () => {
           <p className="text-slate-600 py-2">{user?.email}</p>
           <button
             onClick={logOutBtn}
-            className="bg-primary hover:bg-primary/75 active:scale-95 cursor-pointer text-white font-semibold px-3 py-1"
+            className="bg-darkBlue hover:bg-darkBlue/75 active:scale-95 cursor-pointer text-white font-semibold px-3 py-1"
           >
             Log out
           </button>

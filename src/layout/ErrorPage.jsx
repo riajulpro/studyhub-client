@@ -12,7 +12,7 @@ const ErrorPage = () => {
         </div>
         <Link
           to={"/"}
-          className="bg-primary text-white px-3 py-1 mr-1 hover:bg-primary/75 active:scale-95 rounded"
+          className="bg-darkBlue text-white px-3 py-1 mr-1 hover:bg-darkBlue/75 active:scale-95 rounded"
         >
           Back to Home
         </Link>

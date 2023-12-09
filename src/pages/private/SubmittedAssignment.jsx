@@ -88,7 +88,10 @@ const SubmittedAssignment = () => {
       </Helmet>
       <div className="md:w-9/12 mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2 my-3">
         {mySubmission.map((data) => (
-          <div key={data._id} className="bg-gray-50 p-2 border rounded-md">
+          <div
+            key={data._id}
+            className="bg-gray-50 dark:bg-footer p-2 border rounded-md"
+          >
             <p className="font-semibold">{data.title}</p>
             <p className="text-sm">Examinee: {data.examinee}</p>
             <p className="border-b mb-2">Marks: {data.marks}</p>
@@ -100,7 +103,7 @@ const SubmittedAssignment = () => {
                 <AiOutlineDelete />
               </button>
               <button
-                className="bg-primary hover:bg-primary/75 cursor-pointer text-white py-1 px-3 font-semibold rounded-sm active:scale-95"
+                className="bg-darkBlue hover:bg-darkBlue/75 cursor-pointer text-white py-1 px-3 font-semibold rounded-sm active:scale-95"
                 onClick={() => setActivateModal(true)}
               >
                 Give mark
@@ -111,7 +114,7 @@ const SubmittedAssignment = () => {
                 <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-60">
                   <div className="fixed bg-white w-2/3 md:w-1/2 h-auto top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-5 rounded-md">
                     <div>
-                      <div className="bg-gray-50 p-1 border rounded-sm mb-3">
+                      <div className="bg-secondary p-1 border rounded-sm mb-3">
                         <div className="border-b">
                           <PdfViewer pdfUrl={data?.pdf} />
                         </div>
@@ -162,11 +165,11 @@ const SubmittedAssignment = () => {
                           <input
                             type="submit"
                             value="Submit"
-                            className="bg-primary hover:bg-primary/75 active:scale-95 cursor-pointer text-white font-semibold px-3 py-1 mr-2"
+                            className="bg-darkBlue hover:bg-darkBlue/75 active:scale-95 cursor-pointer text-white font-semibold px-3 py-1 mr-2"
                           />
                           <button
                             onClick={() => setActivateModal(false)}
-                            className="bg-gray-100 hover:bg-gray-50 cursor-pointer font-semibold px-3 py-1 active:scale-95"
+                            className="bg-gray-100 hover:bg-secondary cursor-pointer font-semibold px-3 py-1 active:scale-95"
                           >
                             Close
                           </button>

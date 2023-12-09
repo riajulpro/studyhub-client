@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 const Faq = () => {
   const faqData = [
     {
@@ -38,20 +40,23 @@ const Faq = () => {
   ];
 
   return (
-    <section className="py-16 bg-gray-100">
+    <section className="py-16 bg-gray-100 dark:bg-footer">
       <div className="w-11/12 md:w-9/12 mx-auto">
         <h2 className="text-3xl font-bold mb-8 text-center">
           Frequently Asked Questions
         </h2>
         <div className="grid grid-cols-1 gap-1">
           {faqData.map((item, index) => (
-            <div
+            <motion.div
               key={index}
-              className="p-4 bg-white shadow-md rounded border-b-2 border-primary"
+              initial={index % 2 === 0 ? { scale: 0 } : { scale: -1 }}
+              whileInView={{ scale: 1 }}
+              transition={{ duration: 0.5 }}
+              className="p-4 bg-white dark:bg-darkBlue shadow-md rounded border-b-2 border-darkBlue dark:border-lightBlue"
             >
               <h3 className="text-xl font-semibold mb-2">{item.question}</h3>
               <p>{item.answer}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

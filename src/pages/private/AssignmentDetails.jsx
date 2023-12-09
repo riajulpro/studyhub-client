@@ -86,7 +86,7 @@ const AssignmentDetails = () => {
             </p>
             <p>
               <button
-                className="bg-primary text-white px-3 py-1 mr-1 hover:bg-primary/75 active:scale-95 rounded mt-3"
+                className="bg-darkBlue text-white px-3 py-1 mr-1 hover:bg-darkBlue/75 active:scale-95 rounded mt-3"
                 onClick={() => setActivateModal(true)}
               >
                 Take the Assignment
@@ -123,11 +123,11 @@ const AssignmentDetails = () => {
                     <input
                       type="submit"
                       value="Submit"
-                      className="bg-primary hover:bg-primary/75 active:scale-95 cursor-pointer text-white font-semibold px-3 py-1 mr-2"
+                      className="bg-darkBlue hover:bg-darkBlue/75 active:scale-95 cursor-pointer text-white font-semibold px-3 py-1 mr-2"
                     />
                     <button
                       onClick={() => setActivateModal(false)}
-                      className="bg-gray-100 hover:bg-gray-50 cursor-pointer font-semibold px-3 py-1 active:scale-95"
+                      className="bg-gray-100 hover:bg-secondary cursor-pointer font-semibold px-3 py-1 active:scale-95"
                     >
                       Close
                     </button>
